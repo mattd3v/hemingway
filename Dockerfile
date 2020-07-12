@@ -1,4 +1,4 @@
-FROM hayd/alpine-deno AS base
+FROM hayd/alpine-deno
 
 RUN mkdir -p ~/app
 
