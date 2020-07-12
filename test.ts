@@ -1,7 +1,7 @@
 import { assert } from "https://deno.land/std@0.53.0/testing/asserts.ts";
 
-Deno.test("GET - /users", async () => {
-  const response = await fetch("http://app:8000");
+Deno.test("GET - /", async () => {
+  const response = await fetch("http://app:8000/");
 
   assert(response.ok);
 
@@ -9,18 +9,18 @@ Deno.test("GET - /users", async () => {
     response.body.cancel();
 });
 
-Deno.test("POST - /users", async () => {
+Deno.test("POST - /", async () => {
   const TEST_USER = {
     email: "user@example.com",
     password: "password"
   }
 
-  const response = await fetch("http://app:8000", {
+  const response = await fetch("http://app:8000/", {
     method: "POST",
     body: JSON.stringify(TEST_USER)
   });
 
-  assert(response.ok);
+  assert(!response.ok);
 
   if (response.body)
     response.body.cancel();
