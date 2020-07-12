@@ -11,7 +11,7 @@ services:
   app:
     build: .
     image: app
-    command: npm start
+    command: run --allow-env --allow-net main.ts
     environment:
       APP_DB_HOST: db
       APP_DB_USER: postgres
@@ -23,14 +23,9 @@ services:
 
   app-test:
     image: app
-    command: dockerize
-        -wait tcp://db:5432 -wait tcp://app:8000 -timeout 10s
-        bash -c 'node db.js && npm test'
+    command: test --allow-env --allow-net
     environment:
       APP_URL: http://app:8000
-      APP_DB_HOST: db
-      APP_DB_USER: postgres
-      APP_DB_PASSWORD: hashword
     depends_on:
       - db
       - app

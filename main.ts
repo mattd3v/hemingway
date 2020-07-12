@@ -16,7 +16,11 @@ const db = require('knex')({
 });
 */
 
-const APP = new App();
+const app = new App();
+
+app.use((ctx) => {
+  ctx.response.body = "Hello, World";
+});
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
@@ -49,9 +53,6 @@ app.route('/api/users').get((req, res, next) => {
 });
 */
 
-try {
-  await APP.listen({ port: 8000 });
-} catch(err) {
-  console.error(err);
-}
+console.log("LISTENING");
+await app.listen({ port: 8000 });
 
